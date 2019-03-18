@@ -2,5 +2,9 @@
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $SCRIPTDIR/variables.sh;
 
-rm -f $plex_playlists/* && cd $playlists && find -iname '*.m3u' -exec cp -prv {} "$plex_playlists" ";"
+rm -f $plex_playlists/*;
+cd $playlists;
 
+for f in *.m3u8; do
+    cp -prv -- "$f" "${plex_playlists}/${f%.m3u8}.m3u"
+done
